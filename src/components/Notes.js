@@ -13,6 +13,7 @@ const Notes = () => {
             title={noteItems.title}
             description={noteItems.description}
             tag={noteItems.tag}
+            key={noteItems._id}
           />
         );
       })}
