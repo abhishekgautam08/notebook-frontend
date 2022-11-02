@@ -3,6 +3,7 @@ import React from "react";
 const Login = () => {
   const onSubmit = (e) => {
     e.prevent.default();
+    fetch("localhost:5000/api/auth/login");
   };
   return (
     <>
