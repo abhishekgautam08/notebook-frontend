@@ -5,7 +5,7 @@ const Notes = require("../models/Notes");
 const { body, validationResult } = require("express-validator");
 
 // Route 1:  Get all the notes: get "/api/notes/fetchallnotes" Login requied
-router.get("/fetchallnotes", fetchuser, async (req, res) => {
+router.get("/", fetchuser, async (req, res) => {
   try {
     const notes = await Notes.find({ user: req.user.id });
     res.json(notes);
@@ -16,8 +16,8 @@ router.get("/fetchallnotes", fetchuser, async (req, res) => {
 });
 
 // Route 2 :  add a new note: get "/api/notes/addnotes" Login requied
-router.get(
-  "/addnotes",
+router.post(
+  "/",
   fetchuser,
   [
     body("title", "Enter valid title").isLength({ min: 3 }),
@@ -50,7 +50,7 @@ router.get(
 );
 
 // Route 3:  UPDATE existing  notes: put "/api/notes/fetchallnotes" Login requied
-router.put("/updatenotes/:id", fetchuser, async (req, res) => {
+router.put("/:id", fetchuser, async (req, res) => {
   try {
     const { title, description, tag } = req.body;
     //creating a newnotes object
@@ -88,8 +88,8 @@ router.put("/updatenotes/:id", fetchuser, async (req, res) => {
   }
 });
 
-// Route 4:  delete a exisiting  notes: put "/api/notes/deletenotes" Login requied
-router.put("/deletenotes/:id", fetchuser, async (req, res) => {
+// Route 4:  delete a exisiting  notes: delete "/api/notes/deletenotes" Login requied
+router.delete("/:id", fetchuser, async (req, res) => {
   try {
     //find the  note to be delete and delete it
 
