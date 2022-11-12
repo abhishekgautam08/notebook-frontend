@@ -46,13 +46,15 @@ router.post(
       });
 
       const data = {
-        id: user.id,
+        user: {
+          id: user.id,
+        },
       };
       const authtoken = jwt.sign(data, JWT__SECRET);
       success = true;
       res.json({ success, authtoken });
 
-      res.json("ok user added");
+      // res.json("ok user added");
       // catch error
     } catch (error) {
       console.error(error.message);

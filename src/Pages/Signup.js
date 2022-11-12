@@ -39,8 +39,9 @@ const Signup = (props) => {
   };
   return (
     <div>
+      <h2> Create a Account</h2>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
+        <div className="form-group mb-3">
           <label htmlFor="name">Name</label>
           <input
             type="text"
@@ -52,7 +53,7 @@ const Signup = (props) => {
             name="name"
           />
         </div>
-        <div className="form-group">
+        <div className="form-group mb-3">
           <label htmlFor="exampleInputEmail1">Email address</label>
           <input
             type="email"
@@ -61,10 +62,10 @@ const Signup = (props) => {
             aria-describedby="emailHelp"
             placeholder="Enter email"
             onChange={onChange}
-            nanme="email"
+            name="email"
           />
         </div>
-        <div className="form-group">
+        <div className="form-group mb-3">
           <label htmlFor="password">Password</label>
           <input
             type="password"
@@ -72,13 +73,14 @@ const Signup = (props) => {
             id="password"
             placeholder="Password"
             onChange={onChange}
-            nanme="password"
+            name="password"
             minLength={5}
             required
+            autoComplete="auto"
           />
         </div>
 
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary ">
           Submit
         </button>
       </form>

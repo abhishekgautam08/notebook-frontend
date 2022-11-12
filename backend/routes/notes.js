@@ -40,8 +40,8 @@ router.post(
         tag,
         user: req.user.id,
       });
-      const savedNotes = notes.save();
-      res.json({ savedNotes });
+      const savedNotes = await notes.save();
+      res.json(savedNotes);
     } catch (error) {
       console.error(error.message);
       res.status(500).send("Some Error occured");
