@@ -3,11 +3,10 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
-import About from "./Pages/About";
-import NoteState from "./context/notes/NoteState";
 import Alert from "./components/Alert";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
+import AuthState from "./context/auth/AuthState";
 function App() {
   const [alert, setAlert] = useState(null);
 
@@ -22,14 +21,14 @@ function App() {
   };
   return (
     <>
-      <NoteState>
-        <Router>
+      <Router>
+        <AuthState>
           <Navbar />
           <Alert alert={alert} />
           <div className="container">
             <Routes>
               <Route path="/" element={<Home showAlert={showAlert} />} />
-              <Route path="/about" element={<About />} />
+
               <Route path="/login" element={<Login showAlert={showAlert} />} />
               <Route
                 path="/signup"
@@ -37,8 +36,8 @@ function App() {
               />
             </Routes>
           </div>
-        </Router>
-      </NoteState>
+        </AuthState>
+      </Router>
     </>
   );
 }

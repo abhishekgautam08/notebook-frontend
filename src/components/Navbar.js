@@ -1,15 +1,10 @@
-import { React, useEffect } from "react";
+import { React } from "react";
 import { Link } from "react-router-dom";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/auth/AuthState";
 
 const Navbar = () => {
-  let location = useLocation();
-  const navigate = useNavigate();
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/login");
-  };
-  useEffect(() => {}, [location]);
+  const { user, logout } = useAuth();
+
   return (
     <>
       <nav className="navbar navbar-dark bg-dark">
@@ -29,30 +24,7 @@ const Navbar = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <Link
-                  className={`nav-link ${
-                    location.pathname === "/" ? "active" : ""
-                  }`}
-                  aria-current="page"
-                  to="/"
-                >
-                  Home
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  className={`nav-link ${
-                    location.pathname === "/about" ? "active" : ""
-                  }`}
-                  to="/about"
-                >
-                  About
-                </Link>
-              </li>
-            </ul>
-            {!localStorage.getItem("token") ? (
+            {!user ? (
               <form className="d-flex">
                 <Link
                   className="btn btn-primary mx-2"
@@ -70,9 +42,20 @@ const Navbar = () => {
                 </Link>
               </form>
             ) : (
-              <button onClick={handleLogout} className="byn byn-primary">
-                Logout
-              </button>
+              <>
+                <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li className="nav-item text-white bg-dark mb-3">
+                    <b> Name-</b>
+                    {user.name}
+                  </li>
+                  <li className="nav-item text-white bg-dark mb-3">
+                    <b>Email-</b> {user.email}
+                  </li>
+                </ul>
+                <button onClick={logout} className="btn btn-primary">
+                  Logout
+                </button>
+              </>
             )}
           </div>
         </div>
